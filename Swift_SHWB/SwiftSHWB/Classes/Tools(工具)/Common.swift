@@ -9,7 +9,11 @@
 import Foundation
 
 // MARK:- 授权的常量
-
 let app_key = "4085871744"
 let App_Secret = "e950f9e1c26df118f581642d18537ad1"
 let redirect_uri = "http://www.jianshu.com/u/87c7aa9de064"
+
+
+// MARK:- 选择照片的通知常量
+let picPickerAddPhotoNote = "picPickerAddPhotoNote"
+let picPickerRemovePhotoNote = "picPickerRemovePhotoNote"

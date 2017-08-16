@@ -14,11 +14,14 @@ class BaseTableViewController: UITableViewController {
     lazy var visitorView : VisitorView = VisitorView.visitorView()
     
     // MARK:- 定义变量
-    var isLogin : Bool = false
+    var isLogin : Bool = UserAccountViewModel.shareIntance.isLogin
     
     // MARK:- 系统回调函数
     override func loadView() {
         
+        isLogin ? super.loadView() : setupVisitorView()
+        /*
+         封装至UserAccountViewModel中
         // 1.从沙盒中读取归档的信息
         // 1.1.获取沙盒路径
         var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
@@ -37,6 +40,8 @@ class BaseTableViewController: UITableViewController {
         
         // 判断要加载哪一个View
         isLogin ? super.loadView() : setupVisitorView()
+         */
+        
     }
     
     override func viewDidLoad() {

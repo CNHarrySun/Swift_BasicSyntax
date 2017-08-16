@@ -20,14 +20,14 @@ class MainViewController: UITabBarController {
         
         setupComposBtn()
     }
-    
+    /*
 //    // 下面这些代码如果放在viewDidLoad里面，会在viewWillAppear调整回来（调整tabbar都是在viewWillAppear里面调整的）
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        
 //        setupTabbarItems()
 //    }
-    
+ */
 }
 
 
@@ -39,17 +39,12 @@ extension MainViewController {
         
         // 1.将composeBtn添加到tabbar中
         tabBar.addSubview(composeBtn)
-        
-        
         // 2.设置位置
         composeBtn.center = CGPoint(x: tabBar.center.x, y: tabBar.bounds.size.height * 0.5)
-        
         // 3.监听发布按钮的点击
         // Selector两种写法：1>Selector("方法名")  2>"方法名"
         composeBtn.addTarget(self, action: #selector(MainViewController.composeBtnClick), for: .touchUpInside)
     }
-    
-    
     /*
     // 设置item
     func setupTabbarItems() {
@@ -80,7 +75,9 @@ extension MainViewController {
     // 如果Swift中将一个函数声明为private，那么该函数不会被添加到方法列表中
     // 如果在private前面加上@objc，那么该方法依然会被添加到方法列表中
     func composeBtnClick() {
-        print("composeBtnClick")
+        let composeVC = ComposeViewController()
+        let composeNav = UINavigationController(rootViewController: composeVC)
+        present(composeNav, animated: true, completion: nil)
     }
 }
 

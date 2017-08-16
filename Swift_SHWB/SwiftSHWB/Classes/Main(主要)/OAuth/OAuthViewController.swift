@@ -50,7 +50,7 @@ extension OAuthViewController{
     }
     func fillItemClick(){
         // 1.书写js代码：JavaScript / java --> 雷锋和雷峰塔之间的区别
-        let jsCode = "document.getElementById('userId').value='zhanghao';document.getElementById('passwd').value='mima';"
+        let jsCode = "document.getElementById('userId').value='账号';document.getElementById('passwd').value='密码';"
         // 2.执行js代码
         webView.stringByEvaluatingJavaScript(from: jsCode)
     }
@@ -153,12 +153,24 @@ extension OAuthViewController{
             account.avatar_large = userInfoDict["avatar_large"] as? String
             
             // 4. 将account对象保存
-            // 4.1.获取沙盒路径
-            var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-//            accountPath = accountPath.appending("account.plist")
-            accountPath = (accountPath as NSString).appendingPathComponent("account.plist")
-            // 4.2.保存对象
-            NSKeyedArchiver.archiveRootObject(account, toFile: accountPath)
+            /*
+//            // 4.1.获取沙盒路径
+//            var accountPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+////            accountPath = accountPath.appending("account.plist")
+//            accountPath = (accountPath as NSString).appendingPathComponent("account.plist")
+//            // 4.2.保存对象
+//            NSKeyedArchiver.archiveRootObject(account, toFile: accountPath)
+            */
+            NSKeyedArchiver.archiveRootObject(account, toFile: UserAccountViewModel.shareIntance.accountPath)
+            
+            
+            // 5.将account对象设置到单例对象中
+            UserAccountViewModel.shareIntance.account = account
+            
+            // 6.退出当前控制器
+            self.dismiss(animated: false, completion: {
+                UIApplication.shared.keyWindow?.rootViewController = WelcomeViewController()
+            })
         }
     }
 }
